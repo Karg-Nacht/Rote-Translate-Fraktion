@@ -200,7 +200,7 @@ internal sealed class TranslationService
 
         var yandexKey = ReadSetting(setting, "RTF_YANDEX_TRANSLATOR_KEY");
         if (yandexKey is not null)
-            yield return Classic("Яндекс Переводчик", (text, target, ct) =>
+            yield return Classic("Yandex Translate", (text, target, ct) =>
                 TranslateChunks(text, target, 9500, (part, language, token) =>
                     TranslateYandex(yandexKey, part, language, token), ct));
 

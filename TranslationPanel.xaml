@@ -57,13 +57,13 @@
                 </Grid.RowDefinitions>
                 <DockPanel x:Name="Header">
                     <Button x:Name="CloseButton" DockPanel.Dock="Right" Style="{StaticResource IconButton}"
-                            Click="CloseClicked" Focusable="False" ToolTip="Закрыть панель"
-                            AutomationProperties.Name="Закрыть панель перевода">
+                            Click="CloseClicked" Focusable="False" ToolTip="Close panel"
+                            AutomationProperties.Name="Close translation panel">
                         <Path Data="{StaticResource CloseGlyph}" Stroke="{StaticResource Bone}" StrokeThickness="1.45"
                               StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
                     </Button>
                     <Button x:Name="SettingsButton" DockPanel.Dock="Right" Style="{StaticResource IconButton}"
-                            Click="SettingsClicked" Focusable="False" ToolTip="Настройки" AutomationProperties.Name="Настройки">
+                            Click="SettingsClicked" Focusable="False" ToolTip="Settings" AutomationProperties.Name="Settings">
                         <Path x:Name="SettingsGlyph" Width="14" Height="14" Stretch="Uniform" RenderTransformOrigin=".5,.5"
                               Stroke="{StaticResource Bone}" StrokeThickness="1.2"
                               StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
@@ -71,7 +71,7 @@
                     </Button>
                     <Button x:Name="ProviderSwitch" DockPanel.Dock="Right" Style="{StaticResource CompactButton}" MinWidth="35"
                             Margin="0,0,5,0" VerticalAlignment="Center" Click="SwitchProviderClicked" Focusable="False"
-                            ToolTip="Переключиться на Google Translate"
+                            ToolTip="Switch to Google Translate"
                             AutomationProperties.Name="{Binding ToolTip, RelativeSource={RelativeSource Self}}">
                         <Path Data="M1,3 H12 L9,0 M12,8 H1 L4,11" Stroke="{StaticResource Bone}" StrokeThickness="1.3"
                               StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeLineJoin="Round"/>
@@ -100,43 +100,43 @@
 
                     <DockPanel>
                         <Button x:Name="CopyOriginal" DockPanel.Dock="Right" Style="{StaticResource CopyButton}"
-                                Click="CopyOriginalClicked" ToolTip="Копировать оригинал" AutomationProperties.Name="Копировать оригинал"/>
+                                Click="CopyOriginalClicked" ToolTip="Copy original" AutomationProperties.Name="Copy original"/>
                         <Button x:Name="PreviewOriginal" DockPanel.Dock="Right" Style="{StaticResource PanelIcon}" Margin="0,0,3,0"
                                 FontSize="10" FontWeight="SemiBold" Content="MD" Click="PreviewOriginalClicked"
-                                ToolTip="Показать Markdown оригинала"
-                                AutomationProperties.Name="Переключить редактор и Markdown оригинала"/>
+                                ToolTip="Preview original as Markdown"
+                                AutomationProperties.Name="Switch between the editor and Markdown preview"/>
                         <Button x:Name="ClearOriginal" DockPanel.Dock="Right" Style="{StaticResource PanelIcon}" Margin="0,0,3,0"
-                                Click="ClearOriginalClicked" ToolTip="Очистить исходный текст" AutomationProperties.Name="Очистить исходный текст">
+                                Click="ClearOriginalClicked" ToolTip="Clear original text" AutomationProperties.Name="Clear original text">
                             <Path Data="M1,3 H13 M5,3 V1 H9 V3 M3,5 L4,13 H10 L11,5 M6,6 V10 M8,6 V10"
                                   Stroke="{StaticResource Bone}" StrokeThickness="1.15" StrokeStartLineCap="Round"
                                   StrokeEndLineCap="Round" StrokeLineJoin="Round"/>
                         </Button>
-                        <TextBlock Text="Оригинал" Style="{StaticResource PanelLabel}"/>
+                        <TextBlock Text="Original" Style="{StaticResource PanelLabel}"/>
                     </DockPanel>
 
                     <Border Grid.Row="1" Margin="0,5,0,0" Style="{StaticResource ReadingSurface}">
                         <Grid>
                             <TextBox x:Name="Original" Style="{StaticResource PanelEditor}" AcceptsReturn="True" TextWrapping="Wrap"
-                                     Tag="Введите или вставьте текст" SpellCheck.IsEnabled="False" PreviewMouseDown="FocusContent"
-                                     TextChanged="OriginalChanged" AutomationProperties.Name="Исходный текст"/>
+                                     Tag="Type or paste text" SpellCheck.IsEnabled="False" PreviewMouseDown="FocusContent"
+                                     TextChanged="OriginalChanged" AutomationProperties.Name="Original text"/>
                             <local:MarkdownTextView x:Name="OriginalPreview" Visibility="Collapsed"
-                                                    PreviewMouseDown="FocusContent" AutomationProperties.Name="Markdown оригинала"/>
+                                                    PreviewMouseDown="FocusContent" AutomationProperties.Name="Original Markdown preview"/>
                         </Grid>
                     </Border>
 
                     <DockPanel Grid.Column="2">
                         <Button x:Name="CopyTranslation" DockPanel.Dock="Right" Style="{StaticResource CopyButton}"
-                                Click="CopyTranslationClicked" ToolTip="Копировать перевод" AutomationProperties.Name="Копировать перевод"/>
+                                Click="CopyTranslationClicked" ToolTip="Copy translation" AutomationProperties.Name="Copy translation"/>
                         <local:SearchPicker x:Name="TargetLanguage" DockPanel.Dock="Right" MinWidth="65" MaxWidth="124"
                                             MinHeight="24" Margin="0,0,4,0" Padding="8,0" FontSize="11"
-                                            AutomationProperties.Name="Язык перевода"/>
-                        <TextBlock Text="Перевод" Style="{StaticResource PanelLabel}"/>
+                                            AutomationProperties.Name="Target language"/>
+                        <TextBlock Text="Translation" Style="{StaticResource PanelLabel}"/>
                     </DockPanel>
 
                     <Border Grid.Row="1" Grid.Column="2" Margin="0,5,0,0" Style="{StaticResource ReadingSurface}">
                         <Grid>
                             <local:MarkdownTextView x:Name="Translation" PreviewMouseDown="FocusContent"
-                                                    AutomationProperties.Name="Текст перевода"/>
+                                                    AutomationProperties.Name="Translated text"/>
                             <StackPanel VerticalAlignment="Top" Margin="10,7">
                                 <StackPanel.Style>
                                     <Style TargetType="StackPanel">
@@ -154,7 +154,7 @@
                                     <TextBlock x:Name="TranslationStatus" FontSize="13" Foreground="{StaticResource SecondaryInk}"
                                                TextWrapping="Wrap" IsHitTestVisible="False" AutomationProperties.LiveSetting="Polite"/>
                                 </DockPanel>
-                                <Button x:Name="TranslationRetry" Style="{StaticResource CompactButton}" Content="Повторить"
+                                <Button x:Name="TranslationRetry" Style="{StaticResource CompactButton}" Content="Retry"
                                         Click="RetryTranslationClicked" Visibility="Collapsed" Focusable="False"
                                         HorizontalAlignment="Left" Margin="0,8,0,0"/>
                             </StackPanel>
@@ -163,7 +163,7 @@
 
                     <DockPanel Grid.Row="2" Grid.ColumnSpan="3" Margin="0,7,0,0">
                         <Button x:Name="TranslateButton" DockPanel.Dock="Right" Style="{StaticResource CompactPrimaryButton}"
-                                Click="TranslateClicked" Content="Перевести" AutomationProperties.Name="Перевести"/>
+                                Click="TranslateClicked" Content="Translate" AutomationProperties.Name="Translate"/>
                         <TextBlock x:Name="TranslationProvider" Margin="0,0,8,0" VerticalAlignment="Center" FontSize="11"
                                    Foreground="{StaticResource SecondaryInk}" TextTrimming="CharacterEllipsis"/>
                     </DockPanel>
@@ -171,7 +171,7 @@
             </Grid>
             <Thumb x:Name="HeightGrip" Height="10" VerticalAlignment="Bottom" Cursor="SizeNS"
                    DragStarted="StartResize" DragDelta="MoveResize" DragCompleted="EndResize"
-                   AutomationProperties.Name="Изменить высоту панели">
+                   AutomationProperties.Name="Resize translation panel">
                 <Thumb.Template>
                     <ControlTemplate TargetType="Thumb">
                         <Grid Background="Transparent">

@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Threading;
 using Forms = System.Windows.Forms;
@@ -27,6 +28,7 @@ public partial class App : Application
 
     protected override void OnStartup(StartupEventArgs e)
     {
+        CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
         base.OnStartup(e);
 
         trayMenu = new TrayExitMenu(() => Dispatcher.BeginInvoke(() => ShowSettings(null)), () => Shutdown());

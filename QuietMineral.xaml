@@ -699,8 +699,8 @@
                                     KeyboardNavigation.TabNavigation="Cycle">
                                 <DockPanel>
                                     <Grid DockPanel.Dock="Top" Margin="0,0,0,5">
-                                        <TextBox x:Name="PART_Search" Tag="Поиск" Padding="29,5,8,5" MinHeight="32"
-                                                 AutomationProperties.Name="Поиск по списку"/>
+                                        <TextBox x:Name="PART_Search" Tag="Search" Padding="29,5,8,5" MinHeight="32"
+                                                 AutomationProperties.Name="Search options"/>
                                         <Path Data="{StaticResource SearchGlyph}" Stroke="{StaticResource Muted}" StrokeThickness="1.15"
                                               HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"
                                               IsHitTestVisible="False"/>
@@ -708,7 +708,7 @@
                                     <Grid>
                                         <ListBox x:Name="PART_Options" Style="{StaticResource PickerOptionList}"
                                                  ItemContainerStyle="{StaticResource PickerOptionRow}" MaxHeight="220"
-                                                 AutomationProperties.Name="Варианты выбора">
+                                                 AutomationProperties.Name="Available options">
                                             <ListBox.ItemTemplate>
                                                 <DataTemplate>
                                                     <DockPanel>
@@ -737,7 +737,7 @@
                                                 </DataTemplate>
                                             </ListBox.ItemTemplate>
                                         </ListBox>
-                                        <TextBlock Text="Ничего не найдено" Foreground="{StaticResource SecondaryInk}" Margin="9,8"
+                                        <TextBlock Text="No results found" Foreground="{StaticResource SecondaryInk}" Margin="9,8"
                                                    IsHitTestVisible="False" AutomationProperties.LiveSetting="Polite">
                                             <TextBlock.Style>
                                                 <Style TargetType="TextBlock">
@@ -884,24 +884,24 @@
     </Style>
 
     <ContextMenu x:Key="EditorMenu" x:Shared="False">
-        <MenuItem Header="Отменить" Command="ApplicationCommands.Undo"
+        <MenuItem Header="Undo" Command="ApplicationCommands.Undo"
                   CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
         <Separator/>
-        <MenuItem Header="Вырезать" Command="ApplicationCommands.Cut"
+        <MenuItem Header="Cut" Command="ApplicationCommands.Cut"
                   CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
-        <MenuItem Header="Копировать" Command="ApplicationCommands.Copy"
+        <MenuItem Header="Copy" Command="ApplicationCommands.Copy"
                   CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
-        <MenuItem Header="Вставить" Command="ApplicationCommands.Paste"
+        <MenuItem Header="Paste" Command="ApplicationCommands.Paste"
                   CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
         <Separator/>
-        <MenuItem Header="Выделить всё" Command="ApplicationCommands.SelectAll"
+        <MenuItem Header="Select all" Command="ApplicationCommands.SelectAll"
                   CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
     </ContextMenu>
 
     <ContextMenu x:Key="ReadingMenu" x:Shared="False">
-        <MenuItem Header="Копировать" Command="ApplicationCommands.Copy"
+        <MenuItem Header="Copy" Command="ApplicationCommands.Copy"
                   CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
-        <MenuItem Header="Выделить всё" Command="ApplicationCommands.SelectAll"
+        <MenuItem Header="Select all" Command="ApplicationCommands.SelectAll"
                   CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
     </ContextMenu>
     <Style TargetType="local:SettingsTabControl">

@@ -23,20 +23,20 @@ public partial class SettingsWindow : Window
 
     private static readonly Choice<TranslationMode>[] Modes =
     {
-        new(TranslationMode.AiFirst, "Сначала ИИ, затем переводчики"),
-        new(TranslationMode.TranslatorsFirst, "Сначала переводчики, затем ИИ"),
-        new(TranslationMode.AiOnly, "Только ИИ"),
-        new(TranslationMode.TranslatorsOnly, "Только переводчики"),
-        new(TranslationMode.LocalAiOnly, "Только локальный ИИ")
+        new(TranslationMode.AiFirst, "AI first, translation services second"),
+        new(TranslationMode.TranslatorsFirst, "Translation services first, AI second"),
+        new(TranslationMode.AiOnly, "AI only"),
+        new(TranslationMode.TranslatorsOnly, "Translation services only"),
+        new(TranslationMode.LocalAiOnly, "Local AI only")
     };
 
     private static readonly ClassicApi[] Apis =
     {
-        new("Яндекс Переводчик", "RTF_YANDEX_TRANSLATOR_KEY"),
+        new("Yandex Translate", "RTF_YANDEX_TRANSLATOR_KEY"),
         new("DeepL", "RTF_DEEPL_KEY"),
-        new("Microsoft Translator", "RTF_AZURE_TRANSLATOR_KEY", "RTF_AZURE_TRANSLATOR_REGION", "Регион Azure"),
+        new("Microsoft Translator", "RTF_AZURE_TRANSLATOR_KEY", "RTF_AZURE_TRANSLATOR_REGION", "Azure region"),
         new("Google Cloud", "RTF_GOOGLE_CLOUD_KEY"),
-        new("LibreTranslate", "RTF_LIBRETRANSLATE_KEY", "RTF_LIBRETRANSLATE_URL", "Базовый адрес LibreTranslate")
+        new("LibreTranslate", "RTF_LIBRETRANSLATE_KEY", "RTF_LIBRETRANSLATE_URL", "LibreTranslate base URL")
     };
 
     private readonly TranslationSettingsStore store;
@@ -76,12 +76,12 @@ public partial class SettingsWindow : Window
 
         var targets = new List<PickerOption>
         {
-            new("", "Русский по умолчанию"),
-            new("ru", "Русский"), new("en", "Английский"), new("de", "Немецкий"),
-            new("fr", "Французский"), new("es", "Испанский"), new("it", "Итальянский"),
-            new("pt", "Португальский"), new("uk", "Украинский"), new("pl", "Польский"),
-            new("tr", "Турецкий"), new("zh", "Китайский"), new("ja", "Японский"),
-            new("ko", "Корейский"), new("ar", "Арабский"), new("hi", "Хинди")
+            new("", "Russian (default)"),
+            new("ru", "Russian"), new("en", "English"), new("de", "German"),
+            new("fr", "French"), new("es", "Spanish"), new("it", "Italian"),
+            new("pt", "Portuguese"), new("uk", "Ukrainian"), new("pl", "Polish"),
+            new("tr", "Turkish"), new("zh", "Chinese"), new("ja", "Japanese"),
+            new("ko", "Korean"), new("ar", "Arabic"), new("hi", "Hindi")
         };
         if (!targets.Any(target => target.Value == saved.Target))
             targets.Add(new(saved.Target, saved.Target.ToUpperInvariant()));
@@ -95,8 +95,8 @@ public partial class SettingsWindow : Window
         StyleInstructions.Text = saved.Instructions;
         RequestPicker.ItemsSource = new Choice<bool>[]
         {
-            new(false, "Вручную — по кнопке"),
-            new(true, "Автоматически при открытии")
+            new(false, "Manually"),
+            new(true, "When the panel opens")
         };
         RequestPicker.SelectedValue = saved.TranslateOnOpen;
         UseGoogle.IsChecked = saved.GoogleWeb;
@@ -107,7 +107,7 @@ public partial class SettingsWindow : Window
         ApiPicker.ItemsSource = Apis;
         ApiPicker.SelectedIndex = 0;
         if (store.LoadFailed)
-            ShowFeedback("Не удалось прочитать настройки. Показаны значения по умолчанию.", error: true);
+            ShowFeedback("Couldn't load settings. Showing defaults.", error: true);
     }
 
     internal event Action? SettingsSaved;
@@ -131,11 +131,11 @@ public partial class SettingsWindow : Window
         LoadModels.IsEnabled = true;
         AiHint.Text = profile.Id switch
         {
-            "openrouter" => "openrouter/free подбирает доступную бесплатную модель. Нужен ключ OpenRouter.",
-            "polza" => "Выберите текстовую модель из каталога Polza.ai. Запросы могут расходовать баланс.",
-            "ollama" => "Запустите Ollama и загрузите модель. Ключ обычно не нужен.",
-            "lm-studio" => "Запустите локальный сервер в LM Studio. Ключ нужен только при включённой авторизации.",
-            _ => "Укажите базовый адрес совместимого API, например https://api.openai.com/v1."
+            "openrouter" => "openrouter/free picks an available free model. An OpenRouter API key is required.",
+            "polza" => "Choose a text model from the Polza.ai catalog. Requests may use account credits.",
+            "ollama" => "Start Ollama and download a model. An API key is usually optional.",
+            "lm-studio" => "Start the local server in LM Studio. Enter an API key if authentication is enabled.",
+            _ => "Enter the base URL of a compatible API, such as https://api.openai.com/v1."
         };
     }
 
@@ -187,12 +187,12 @@ public partial class SettingsWindow : Window
         var connection = ReadCurrentAi();
         if (!profile.TryGetBase(connection, out _))
         {
-            AiHint.Text = "Проверьте адрес API. Для локальной модели нужен адрес этого ПК.";
+            AiHint.Text = "Check the API URL. A local model requires a loopback address on this PC.";
             return;
         }
         if (profile.RequiresKey && connection.Key.Length == 0)
         {
-            AiHint.Text = "Введите API-ключ, чтобы загрузить модели.";
+            AiHint.Text = "Enter an API key to load models.";
             return;
         }
 
@@ -202,7 +202,7 @@ public partial class SettingsWindow : Window
         LoadModels.IsEnabled = false;
         ModelPicker.Visibility = Visibility.Collapsed;
         ModelsProgress.Visibility = Visibility.Visible;
-        AiHint.Text = "Загружаю модели…";
+        AiHint.Text = "Loading models…";
         try
         {
             var models = await AiTranslationClient.ListModelsAsync(profile, connection, request.Token);
@@ -214,15 +214,15 @@ public partial class SettingsWindow : Window
             ModelPicker.Visibility = models.Length > 0 ? Visibility.Visible : Visibility.Collapsed;
             if (models.Length > 0)
                 ModelPicker.Open();
-            AiHint.Text = models.Length > 0 ? "Выберите текстовую модель из списка." : "Сервер не вернул модели.";
+            AiHint.Text = models.Length > 0 ? "Select a text model from the list." : "The server returned no models.";
         }
         catch (Exception error) when (error is HttpRequestException or OperationCanceledException or JsonException
             or InvalidDataException or KeyNotFoundException or InvalidOperationException or FormatException)
         {
             if (modelRequest == request)
                 AiHint.Text = error is HttpRequestException { StatusCode: System.Net.HttpStatusCode.Unauthorized or System.Net.HttpStatusCode.Forbidden }
-                    ? "Провайдер отклонил ключ или доступ."
-                    : "Не удалось загрузить модели. Проверьте адрес, ключ или локальный сервер.";
+                    ? "The provider rejected the API key or denied access."
+                    : "Couldn't load models. Check the API URL, key, or local server.";
         }
         finally
         {
@@ -262,9 +262,9 @@ public partial class SettingsWindow : Window
             if (!connections.TryGetValue(profile.Id, out var connection) || !connection.Enabled)
                 continue;
 
-            string? problem = !profile.TryGetBase(connection, out _) ? "проверьте адрес API."
-                : profile.RequiresKey && connection.Key.Length == 0 ? "введите API-ключ."
-                : connection.Model.Length == 0 ? "укажите модель."
+            string? problem = !profile.TryGetBase(connection, out _) ? "check the API URL."
+                : profile.RequiresKey && connection.Key.Length == 0 ? "enter an API key."
+                : connection.Model.Length == 0 ? "enter a model ID."
                 : null;
             if (problem is not null)
             {
@@ -280,19 +280,19 @@ public partial class SettingsWindow : Window
         {
             Tabs.SelectedIndex = 2;
             ApiPicker.SelectedItem = Apis[^1];
-            ShowFeedback("LibreTranslate: нужен HTTPS или локальный HTTP-адрес.", error: true);
+            ShowFeedback("LibreTranslate requires HTTPS or a local HTTP URL.", error: true);
             return;
         }
 
         try { store.Save(ReadDraft()); }
         catch (Exception error) when (error is IOException or UnauthorizedAccessException or CryptographicException)
         {
-            ShowFeedback("Не удалось сохранить настройки. Проверьте доступ к локальному профилю Windows.", error: true);
+            ShowFeedback("Couldn't save settings. Check access to your Windows profile.", error: true);
             return;
         }
 
         savedSuccessfully = true;
-        ShowFeedback("✓  Настройки сохранены", error: false);
+        ShowFeedback("✓  Settings saved", error: false);
         BeginClose(550);
     }
 

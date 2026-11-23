@@ -14,7 +14,7 @@ internal sealed class TrayExitMenu : ContextMenuStrip
         Padding = new Padding(5);
         Renderer = new ExitRenderer();
 
-        var configuration = new ToolStripMenuItem("Настройки RTF") { AutoSize = false, Name = "Settings" };
+        var configuration = new ToolStripMenuItem("RTF Settings") { AutoSize = false, Name = "Settings" };
         configuration.Click += (_, _) => settings();
         var quit = new ToolStripMenuItem("Exit RTF") { AutoSize = false };
         quit.Click += (_, _) => exit();

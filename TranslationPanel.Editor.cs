@@ -89,7 +89,7 @@ public partial class TranslationPanel
     {
         Translation.SetContent(string.Empty);
         TranslationProvider.Text = string.Empty;
-        TranslationStatus.Text = string.IsNullOrWhiteSpace(Original.Text) ? "Здесь появится перевод." : "";
+        TranslationStatus.Text = string.IsNullOrWhiteSpace(Original.Text) ? "The translation will appear here." : "";
         TranslationStatus.Foreground = (Brush)FindResource("SecondaryInk");
         TranslationProgress.Visibility = Visibility.Collapsed;
         TranslationRetry.Visibility = Visibility.Collapsed;
@@ -113,7 +113,7 @@ public partial class TranslationPanel
         var request = new CancellationTokenSource();
         translationRequest = request;
         ResetResult();
-        TranslationStatus.Text = "Ищу перевод…";
+        TranslationStatus.Text = "Preparing translation…";
         TranslationProgress.Visibility = Visibility.Visible;
         _ = TranslateCurrentAsync(text, targetOverride, routeOverride ?? translationRoute, request);
     }
@@ -123,7 +123,7 @@ public partial class TranslationPanel
         var progress = new Progress<string>(provider =>
         {
             if (translationRequest == request)
-                TranslationStatus.Text = $"Перевожу через {provider}…";
+                TranslationStatus.Text = $"Translating with {provider}…";
         });
         try
         {
@@ -153,12 +153,12 @@ public partial class TranslationPanel
             TranslationStatus.Text = result switch
             {
                 { NeedsConfiguration: true } when route == TranslationRoute.Google =>
-                    "Google Translate недоступен. Проверьте настройки API перевода и порядок перевода.",
+                    "Google Translate is unavailable. Check your translation providers and priority.",
                 { NeedsConfiguration: true } when route == TranslationRoute.Ai =>
-                    "Включите и настройте ИИ-провайдера для перевода.",
-                { NeedsConfiguration: true } => "Включите провайдера в настройках.",
-                { ConnectionFailed: true } => "Не удалось подключиться к переводчику.",
-                _ => "Сервис не вернул перевод."
+                    "Enable and configure an AI provider for translation.",
+                { NeedsConfiguration: true } => "Enable a provider in Settings.",
+                { ConnectionFailed: true } => "Couldn't connect to the translation provider.",
+                _ => "The provider returned no translation."
             };
             TranslationStatus.Foreground = (Brush)FindResource("WarningInk");
             TranslationRetry.Visibility = result.NeedsConfiguration ? Visibility.Collapsed : Visibility.Visible;
@@ -190,10 +190,10 @@ public partial class TranslationPanel
             return;
 
         translationRoute = translationRoute == TranslationRoute.Google ? TranslationRoute.Ai : TranslationRoute.Google;
-        ProviderSwitch.Content = translationRoute == TranslationRoute.Google ? "G" : "ИИ";
+        ProviderSwitch.Content = translationRoute == TranslationRoute.Google ? "G" : "AI";
         ProviderSwitch.ToolTip = translationRoute == TranslationRoute.Google
-            ? "Сейчас: Google Translate. Переключиться на ИИ."
-            : "Сейчас: ИИ. Переключиться на Google Translate.";
+            ? "Google Translate is active. Switch to AI."
+            : "AI is active. Switch to Google Translate.";
         CancelTranslation();
         StartTranslation();
     }
@@ -208,7 +208,7 @@ public partial class TranslationPanel
     {
         string name = TranslationLanguages.Label(code);
         TargetLanguage.DisplayText = name;
-        TargetLanguage.ToolTip = targetOverride is null ? $"Авто · {name}" : name;
+        TargetLanguage.ToolTip = targetOverride is null ? $"Automatic · {name}" : name;
     }
 
     private void SetLanguageOptions()
@@ -255,7 +255,7 @@ public partial class TranslationPanel
         OriginalPreview.Visibility = preview ? Visibility.Visible : Visibility.Collapsed;
         Original.Visibility = preview ? Visibility.Collapsed : Visibility.Visible;
         PreviewOriginal.Content = preview ? "✎" : "MD";
-        PreviewOriginal.ToolTip = preview ? "Редактировать оригинал" : "Показать Markdown оригинала";
+        PreviewOriginal.ToolTip = preview ? "Edit original" : "Preview original as Markdown";
     }
 
     private void ClearOriginalClicked(object sender, RoutedEventArgs args)
@@ -286,7 +286,7 @@ public partial class TranslationPanel
         }
         catch (ExternalException)
         {
-            TranslationProvider.Text = "Буфер обмена занят";
+            TranslationProvider.Text = "The clipboard is busy";
         }
     }
 }

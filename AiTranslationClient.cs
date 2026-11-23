@@ -21,7 +21,7 @@ internal sealed record AiProfile(string Id, string Name, string DefaultAddress, 
         new("polza", "Polza.ai", "https://polza.ai/api/v1", ""),
         new("ollama", "Ollama", "http://localhost:11434/v1", "", EditableAddress: true, Local: true, RequiresKey: false),
         new("lm-studio", "LM Studio", "http://localhost:1234/v1", "", EditableAddress: true, Local: true, RequiresKey: false),
-        new("other", "Другое OpenAI API", "https://api.openai.com/v1", "", EditableAddress: true, RequiresKey: false)
+        new("other", "Other OpenAI-compatible API", "https://api.openai.com/v1", "", EditableAddress: true, RequiresKey: false)
     };
 
     internal AiConnection DefaultConnection => new(false, DefaultModel, DefaultAddress, "");

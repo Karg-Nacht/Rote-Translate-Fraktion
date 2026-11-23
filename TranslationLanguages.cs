@@ -9,12 +9,12 @@ internal static partial class TranslationLanguages
 
     internal static readonly Choice[] All =
     [
-        new("", "Авто"), new("ru", "Русский"), new("en", "English"), new("de", "Deutsch"),
-        new("fr", "Français"), new("es", "Español"), new("it", "Italiano"), new("pt", "Português"),
-        new("uk", "Українська"), new("pl", "Polski"), new("tr", "Türkçe"), new("zh", "中文"),
-        new("ja", "日本語"), new("ko", "한국어"), new("ar", "العربية"), new("hi", "हिन्दी"),
-        new("nl", "Nederlands"), new("sv", "Svenska"), new("vi", "Tiếng Việt"), new("he", "עברית"),
-        new("el", "Ελληνικά"), new("cs", "Čeština"), new("fa", "فارسی")
+        new("", "Automatic"), new("ru", "Russian"), new("en", "English"), new("de", "German"),
+        new("fr", "French"), new("es", "Spanish"), new("it", "Italian"), new("pt", "Portuguese"),
+        new("uk", "Ukrainian"), new("pl", "Polish"), new("tr", "Turkish"), new("zh", "Chinese"),
+        new("ja", "Japanese"), new("ko", "Korean"), new("ar", "Arabic"), new("hi", "Hindi"),
+        new("nl", "Dutch"), new("sv", "Swedish"), new("vi", "Vietnamese"), new("he", "Hebrew"),
+        new("el", "Greek"), new("cs", "Czech"), new("fa", "Persian")
     ];
 
     internal static string Label(string code) =>

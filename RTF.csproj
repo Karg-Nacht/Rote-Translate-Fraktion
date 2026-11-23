@@ -11,6 +11,7 @@
     <RootNamespace>Rtf</RootNamespace>
     <ApplicationIcon>Crystal.ico</ApplicationIcon>
     <Product>Rote Translate Fraktion</Product>
+    <Version>1.0.1</Version>
   </PropertyGroup>
   <ItemGroup>
     <Resource Include="Crystal.png" />

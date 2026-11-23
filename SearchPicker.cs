@@ -23,7 +23,7 @@ internal sealed record PickerOption(string Value, string Label);
 public sealed class SearchPicker : Control
 {
     public static readonly DependencyProperty PlaceholderProperty =
-        DependencyProperty.Register(nameof(Placeholder), typeof(string), typeof(SearchPicker), new PropertyMetadata("Выберите значение"));
+        DependencyProperty.Register(nameof(Placeholder), typeof(string), typeof(SearchPicker), new PropertyMetadata("Select an option"));
 
     public static readonly DependencyProperty DisplayTextProperty =
         DependencyProperty.Register(nameof(DisplayText), typeof(string), typeof(SearchPicker),

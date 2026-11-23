@@ -10,12 +10,12 @@
         <StackPanel>
             <DockPanel Margin="0,0,0,11">
                 <Image Width="30" Height="30" Margin="0,0,10,0" Source="StandaloneCrystal.png"/>
-                <TextBlock Text="Не удалось запустить RTF" TextWrapping="Wrap" FontSize="19"
+                <TextBlock Text="Couldn't start RTF" TextWrapping="Wrap" FontSize="19"
                            FontWeight="SemiBold" VerticalAlignment="Center"/>
             </DockPanel>
-            <TextBlock Text="Windows не запустила отслеживание выделенного текста." Style="{StaticResource Hint}"/>
+            <TextBlock Text="Windows couldn't start text selection monitoring." Style="{StaticResource Hint}"/>
             <TextBlock x:Name="Details" Style="{StaticResource Hint}" Foreground="{StaticResource WarningInk}" Margin="0,6,0,16"/>
-            <Button Content="Закрыть" Style="{StaticResource PrimaryButton}" HorizontalAlignment="Right"
+            <Button Content="Close" Style="{StaticResource PrimaryButton}" HorizontalAlignment="Right"
                     IsCancel="True" IsDefault="True"/>
         </StackPanel>
     </Border>

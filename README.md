@@ -10,7 +10,7 @@ Select text in another Windows app, then click the floating crystal to translate
 
 **Translation panel.** Edit the original, preview Markdown and scroll or copy each pane independently.
 
-![RTF translation panel with editable English source text and a Russian Markdown translation](docs/media/translation-panel.png)
+![RTF translation panel with editable English source text and a French Markdown translation](docs/media/translation-panel.png)
 
 **Settings.** Configure provider order, the target language and instructions for AI.
 
@@ -31,7 +31,7 @@ Select text in another Windows app, then click the floating crystal to translate
 
 ## Providers
 
-Settings control the provider order, target language and optional instructions for AI. The app supports Google Translate and MyMemory without an API key. Configurable services include Yandex Translate, Microsoft Translator, DeepL, Google Cloud and LibreTranslate. AI profiles include OpenRouter, Polza.ai, Ollama, LM Studio and OpenAI-compatible endpoints.
+Settings control the provider order, target language and optional instructions for AI. The interface is in English, and the translation language is set separately. The app supports Google Translate and MyMemory without an API key. Configurable services include Yandex Translate, Microsoft Translator, DeepL, Google Cloud and LibreTranslate. AI profiles include OpenRouter, Polza.ai, Ollama, LM Studio and OpenAI-compatible endpoints.
 
 Set provider keys in the app. Local AI mode uses loopback endpoints on this PC. API availability, account quotas and charges depend on the configured provider.
 
