@@ -1,0 +1,24 @@
+
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <AssemblyName>RTF</AssemblyName>
+    <RootNamespace>Rtf</RootNamespace>
+    <ApplicationIcon>Crystal.ico</ApplicationIcon>
+    <Product>Rote Translate Fraktion</Product>
+  </PropertyGroup>
+  <ItemGroup>
+    <Resource Include="Crystal.png" />
+    <Resource Include="StandaloneCrystal.png" />
+    <Resource Include="TrayCrystal.ico" />
+    <Resource Include="MineralGrain.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Markdig" Version="1.6.0" />
+  </ItemGroup>
+</Project>

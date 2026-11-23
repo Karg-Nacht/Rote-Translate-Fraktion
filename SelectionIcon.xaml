@@ -1,0 +1,37 @@
+<local:OverlayWindow x:Class="Rtf.SelectionIcon"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Rtf"
+    Title="RTF selection" Width="56" Height="56"
+    WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True" Background="Transparent"
+    ShowInTaskbar="False" ShowActivated="False" Topmost="True">
+    <Button x:Name="OpenButton" Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center"
+            Click="OpenClicked" Focusable="False" Cursor="Hand"
+            PreviewMouseDown="CrystalPressed" PreviewMouseMove="CrystalMoved" PreviewMouseUp="CrystalReleased"
+            LostMouseCapture="CrystalCaptureLost"
+            AutomationProperties.Name="Open RTF translation">
+        <Button.Template>
+            <ControlTemplate TargetType="Button">
+                <Border x:Name="Plate" CornerRadius="10" BorderBrush="{StaticResource Ink}"
+                        Background="{StaticResource Bone}" BorderThickness="1">
+                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter TargetName="Plate" Property="Background" Value="{StaticResource Ink}"/>
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+        </Button.Template>
+        <Image x:Name="CrystalArtwork" Source="StandaloneCrystal.png" Width="30" Height="30"
+               Stretch="Uniform" RenderTransformOrigin=".5,.5" RenderOptions.BitmapScalingMode="HighQuality">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform x:Name="Compression"/>
+                    <RotateTransform x:Name="Rotation"/>
+                    <TranslateTransform x:Name="Inertia"/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+    </Button>
+</local:OverlayWindow>

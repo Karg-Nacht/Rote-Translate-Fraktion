@@ -1,0 +1,22 @@
+<Window x:Class="Rtf.StartupErrorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Rote Translate Fraktion" Width="420" SizeToContent="Height"
+        WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True" Background="Transparent"
+        WindowStartupLocation="CenterScreen" Topmost="True"
+        FontFamily="{StaticResource InterfaceFont}" FontSize="14">
+    <Border Background="{StaticResource MineralSurface}" BorderBrush="{StaticResource Edge}"
+            BorderThickness="1" CornerRadius="14" Padding="20" TextElement.Foreground="{StaticResource Ink}">
+        <StackPanel>
+            <DockPanel Margin="0,0,0,11">
+                <Image Width="30" Height="30" Margin="0,0,10,0" Source="StandaloneCrystal.png"/>
+                <TextBlock Text="Не удалось запустить RTF" TextWrapping="Wrap" FontSize="19"
+                           FontWeight="SemiBold" VerticalAlignment="Center"/>
+            </DockPanel>
+            <TextBlock Text="Windows не запустила отслеживание выделенного текста." Style="{StaticResource Hint}"/>
+            <TextBlock x:Name="Details" Style="{StaticResource Hint}" Foreground="{StaticResource WarningInk}" Margin="0,6,0,16"/>
+            <Button Content="Закрыть" Style="{StaticResource PrimaryButton}" HorizontalAlignment="Right"
+                    IsCancel="True" IsDefault="True"/>
+        </StackPanel>
+    </Border>
+</Window>
