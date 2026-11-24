@@ -157,6 +157,7 @@ public partial class TranslationPanel
                 { NeedsConfiguration: true } when route == TranslationRoute.Ai =>
                     "Enable and configure an AI provider for translation.",
                 { NeedsConfiguration: true } => "Enable a provider in Settings.",
+                { RateLimited: true } => "Google Translate is limiting requests. Try again later.",
                 { ConnectionFailed: true } => "Couldn't connect to the translation provider.",
                 _ => "The provider returned no translation."
             };

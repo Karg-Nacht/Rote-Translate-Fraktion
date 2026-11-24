@@ -14,7 +14,8 @@ using System.Threading.Tasks;
 namespace Rtf;
 
 internal sealed record TranslationResult(string? Text, string? Provider, string? Target,
-    bool ConnectionFailed = false, bool NeedsConfiguration = false, string? Source = null);
+    bool ConnectionFailed = false, bool NeedsConfiguration = false, string? Source = null,
+    bool RateLimited = false);
 
 internal enum TranslationRoute
 {
@@ -105,6 +106,7 @@ internal sealed class TranslationService
 
         bool connectionFailed = false;
         bool serverResponded = false;
+        bool rateLimited = false;
         foreach (var provider in activeProviders)
         {
             cancellation.ThrowIfCancellationRequested();
@@ -135,6 +137,12 @@ internal sealed class TranslationService
             {
                 connectionFailed = true;
             }
+            catch (HttpRequestException error) when (
+                route == TranslationRoute.Google && error.StatusCode == HttpStatusCode.TooManyRequests)
+            {
+                serverResponded = true;
+                rateLimited = true;
+            }
             catch (Exception error) when (error is HttpRequestException or JsonException or InvalidDataException
                 or FormatException or IOException or KeyNotFoundException or InvalidOperationException or IndexOutOfRangeException)
             {
@@ -143,7 +151,7 @@ internal sealed class TranslationService
         }
 
         cancellation.ThrowIfCancellationRequested();
-        return new(null, null, null, connectionFailed && !serverResponded);
+        return new(null, null, null, connectionFailed && !serverResponded, RateLimited: rateLimited);
     }
 
     private IEnumerable<Provider> ConfigureAi(TranslationSettings settings)

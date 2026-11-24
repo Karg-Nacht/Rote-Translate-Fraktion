@@ -25,7 +25,7 @@ Select text in another Windows app, then click the floating crystal to translate
 
 ## Run
 
-1. Download `RTF-Windows-x64.zip` from **Releases**, extract it and run `RTF.exe`. Install the .NET 10 **Desktop Runtime** if Windows prompts for it.
+1. Download [`RTF-Windows-x64.zip`](https://github.com/Karg-Nacht/Rote-Translate-Fraktion/releases/latest/download/RTF-Windows-x64.zip), extract it and run `RTF.exe`. Install the .NET 10 **Desktop Runtime** if Windows prompts for it.
 2. Select text and click the floating crystal. To open an empty panel, briefly hold the middle mouse button.
 3. Open settings from the gear in the panel or from the tray. Use **Exit RTF** in the tray menu to stop selection monitoring.
 

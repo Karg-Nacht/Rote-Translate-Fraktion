@@ -307,7 +307,7 @@ internal sealed class SelectionMonitor : IDisposable
 
     private static bool ProviderFailure(Exception error) =>
         error is COMException or InvalidOperationException or ArgumentException or Win32Exception
-            or TimeoutException or UnauthorizedAccessException;
+            or TimeoutException or UnauthorizedAccessException or ElementNotAvailableException;
 
     public void Dispose()
     {
